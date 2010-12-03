@@ -13,7 +13,7 @@ class Pop_Handler {
 	{
 		foreach ($this->resource_map as $uri_template => $resource) {
 			//first, translate resource map uri template to a regex
-			$uri_template = trim($r->handler_path.'/'.$uri_template,'/');
+			$uri_template = trim($r->handler.'/'.$uri_template,'/');
 			$uri_regex = $uri_template;
 
 			//skip regex template stuff if uri_template is a plain string

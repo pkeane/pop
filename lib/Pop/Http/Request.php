@@ -63,6 +63,12 @@ class Pop_Http_Request
 		$this->env = $env;
 	}
 
+	public function setParams($params)
+	{
+		$this->params = $params;
+	}
+
+
 	public function __get( $var )
 	{
 		//first env
@@ -191,16 +197,20 @@ class Pop_Http_Request
 	{
 			//precedence is post,get,url_param,set member
 			if ($this->_filterPost($key) || '0' === $this->_filterPost($key)) {
-					$value = $this->_filterPost($key);
+				$value = $this->_filterPost($key);
 			} else {
-					$value = $this->_filterGet($key);
+				$value = $this->_filterGet($key);
 			}
 			if (trim($value) || '0' === substr($value,0,1)) {
-					return $value;
-			} elseif (isset($this->members[$key])) {
-					return $this->members[$key];
+				return $value;
 			} else {
-					return false;
+				if (isset($this->params[$key])) {
+					return $this->params[$key];
+				}
+				if (isset($this->members[$key])) {
+					return $this->members[$key];
+				}
+				return false;
 			}
 	}
 
