@@ -1,16 +1,16 @@
 {extends "base.tpl"}
 
-{block "title"}{$main_title}{/block}
+{block name="title"}{$main_title}{/block}
 
-{block "header"}
+{block name="header"}
 {/block}
 
-{block "sidebar"}
+{block name="sidebar"}
 {/block}
 
-{block "main"}
+{block name="main"}
 <h1>hello sample</h1>
 {/block}
 
-{block "footer"}
+{block name="footer"}
 {/block}
