@@ -32,6 +32,7 @@ class Pop_Http_Request
 	private $params;
 	private $url_params = array();
 	private $user;
+	private $db;
 
 	public function __construct()
 	{
@@ -56,7 +57,7 @@ class Pop_Http_Request
 		//env is assign to this twice since it needs to be use in other methods
 		$this->env = $env;
 		$env['format'] = $this->getFormat();
-		$env['handler'] = $this->getHandler() ? $this->getHandler() : DEFAULT_HANDLER; 
+		$env['handler'] = $this->getHandler(); 
 		$env['path'] = $this->getPath();
 		$env['response_mime_type'] = self::$types[$env['format']];
 		$env['content_type'] = $this->getContentType();
@@ -99,7 +100,7 @@ class Pop_Http_Request
 		if (class_exists($classname,true)) {
 			return new $classname();
 		} else {
-			$this->renderError(404);
+			$this->renderRedirect(DEFAULT_HANDLER);
 		}
 	}
 
@@ -192,6 +193,26 @@ class Pop_Http_Request
 		}
 		return $path;
 	}
+
+  public function setUser($user)
+  {
+    $this->user = $user;
+  }
+
+  public function getUser()
+  {
+    return $this->user;
+  }
+
+  public function setDb($user)
+  {
+    $this->db = $db;
+  }
+
+  public function getDb()
+  {
+    return $this->db;
+  }
 
 	public function get($key)
 	{
